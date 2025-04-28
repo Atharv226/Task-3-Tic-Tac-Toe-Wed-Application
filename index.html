@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GameZone</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #0a0a0a;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: slideDown 1s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    header .logo {
+      font-size: 45px;
+      color: #00fff5;
+      font-weight: bold;
+    }
+
+    nav a {
+      margin-left: 25px;
+      color: white;
+      text-decoration: none;
+      font-size: 22px;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: #00fff5;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #00fff5;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 110px 60px;
+      animation: fadeIn 2s ease;
+    }
+
+    .hero h1 {
+      font-size: 60px;
+      margin-bottom: 20px;
+      animation: pulse 2s infinite;
+    }
+
+    .hero p {
+      font-size: 28px;
+      max-width: 600px;
+      margin: auto;
+      margin-bottom: 30px;
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+
+    .hero button {
+      padding: 15px 20px;
+      font-size: 25px;
+      background-color: #00fff5;
+      border: none;
+      color: black;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+
+    .hero button:hover {
+      background-color: #0ff;
+      transform: scale(1.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        text-shadow: 0 0 5px #00fff5, 0 0 10px #00fff5;
+      }
+      50% {
+        text-shadow: 0 0 20px #00fff5, 0 0 30px #00fff5;
+      }
+    }
+
+    .features {
+      background-color: #111;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .feature-box {
+      background-color: #222;
+      padding: 20px;
+      width: 300px;
+      border-radius: 12px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUpBox 1s ease forwards;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+
+    .feature-box:hover {
+      background-color: #000;
+      transform: scale(1.1);
+    }
+
+    .feature-box:nth-child(1) { animation-delay: 0.3s; }
+    .feature-box:nth-child(2) { animation-delay: 0.6s; }
+    .feature-box:nth-child(3) { animation-delay: 0.9s; }
+    .feature-box:nth-child(4) { animation-delay: 1.2s; }
+
+    @keyframes fadeInUpBox {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .feature-box h3 {
+      color: #00fff5;
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .feature-box p {
+      font-size: 20px;
+      color: #ccc;
+    }
+
+    footer {
+      background-color: #000;
+      text-align: center;
+      padding: 15px 0;
+      font-size: 14px;
+      color: #888;
+      animation: fadeIn 2s ease;
+    }
+
+    /* 🔥 Language Dropdown Styling */
+    .language-dropdown {
+      position: fixed;
+      top: 140px;
+      right: 20px;
+      z-index: 9999;
+      background-color: #000;
+      color: white;
+      padding: 10px;
+      border: 2px solid #00fff5;
+      border-radius: 6px;
+      box-shadow: 0 0 10px #00fff5;
+    }
+
+    .goog-te-combo {
+      background: #000;
+      color: white;
+      border: none;
+      font-size: 16px;
+      padding: 5px;
+      width: 180px;
+      border-radius: 4px;
+      outline: none;
+      cursor: pointer;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- 🔥 Language Dropdown -->
+  <div class="language-dropdown">
+    <div id="google_translate_element"></div>
+  </div>
+
+  <header>
+    <div class="logo">GameZone</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Features</a>
+      <a href="#">Play Now</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Welcome to GameZone</h1>
+    <p>The ultimate online destination for casual and competitive gamers. Dive into epic challenges, connect with players, and conquer the leaderboard!</p>
+    <button onclick="location.href='game.html'">Play Tic-Tac-Toe</button>
+  </section>
+
+  <section class="features">
+    <div class="feature-box">
+      <h3>Multiplayer Games</h3>
+      <p>Play with friends or challenge other players from around the world.</p>
+    </div>
+    <div class="feature-box">
+      <h3>Leaderboards</h3>
+      <p>Track your stats and rise to the top of the ranks.</p>
+    </div>
+    <div class="feature-box">
+      <h3>AI Opponents</h3>
+      <p>Test your skills against smart AI enemies in different difficulty levels.</p>
+    </div>
+    <div class="feature-box">
+      <h3>Free & Fun</h3>
+      <p>All games are completely free to play – jump in and start having fun instantly!</p>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 GameZone. All rights reserved.
+  </footer>
+
+  <!-- 🔥 Google Translate Script -->
+ <!-- Google Translate Dropdown -->
+<div id="google_translate_element" style="position: fixed; top: 10px; right: 10px; z-index: 9999;"></div>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,ma,hi,es,fr,de,zh-CN', // Add more languages if you want
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
